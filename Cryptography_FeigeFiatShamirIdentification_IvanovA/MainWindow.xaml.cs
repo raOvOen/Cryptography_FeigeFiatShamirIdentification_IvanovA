@@ -70,7 +70,7 @@ namespace Cryptography_FeigeFiatShamirIdentification_IvanovA
             do
             {
                 random.NextBytes(bytes);
-                bytes[bytes.Length - 1] &= (byte)0x7F; //force sign bit to positive
+                bytes[bytes.Length - 1] &= (byte)0x7F; 
                 R = new BigInteger(bytes);
             } while (R >= N);
             return R;
@@ -129,26 +129,18 @@ namespace Cryptography_FeigeFiatShamirIdentification_IvanovA
                     s[i] = RandomIntegerBelow(n - 1);
                 }
                 while ((i > 0 && (s[i - 1] == s[i])) || !IsCoprimeTest(s[i],n));
-                //rnd.Next(3000);
-                //RandomIntegerBelow(n - 1);
                 int bi = rnd.Next(2);
                 if (bi == 1)
                 {
                     b[i] = true;
-                    //v[i] = ((-1) * (s[i] * s[i])) % n;
                 }
                 else { 
                     b[i] = false;
-                    //v[i] = (s[i] * s[i]) % n;
                 }
-                //MessageBox.Show(bi.ToString());
-                //v[i] = (BigInteger.Pow((-1), bi) * (s[i] * s[i]) % n);
                 v[i] = mod(BigInteger.Pow((-1), bi) * Euc(s[i]*s[i],n),n);
-                //v[i] = BigInteger.ModPow((s[i] * s[i]), n - 2, n);
             }
-            //MessageBox.Show(mod(-1*(21*21), n).ToString());
         }
-        private static BigInteger Euc(BigInteger a, BigInteger n) // Расширенный алгоритм Евклида, упрощённый для шифра
+        private static BigInteger Euc(BigInteger a, BigInteger n) 
         {
             BigInteger p = 1, r = 0, n_0 = n;
             while (a != 0 && n != 0)
@@ -186,9 +178,7 @@ namespace Cryptography_FeigeFiatShamirIdentification_IvanovA
                     num1 = num2;
                     num2 = temp;
                 }
-                //MessageBox.Show(num1.ToString() + "||" + num2.ToString());
                 num1 = num1 % num2;
-                //MessageBox.Show(num1.ToString());
                 if (num1 == 1) { q = 1; res = true; };
                 if (num1 == 0) { q = 1; res = false; };
             }
@@ -303,7 +293,6 @@ namespace Cryptography_FeigeFiatShamirIdentification_IvanovA
         {
             BigInteger n = BigInteger.Parse(TextBoxInputN.Text);
             string result = "";
-            //result += CountZ(BigInteger.Parse(TextBoxInputY.Text), n).ToString() + "||" + BigInteger.Abs(BigInteger.Parse(TextBoxInputX.Text)).ToString() + "\n";
             if (CountZ(BigInteger.Parse(TextBoxInputY.Text),n) == BigInteger.Parse(TextBoxInputX.Text) || CountZ(BigInteger.Parse(TextBoxInputY.Text), n) == (-1)*BigInteger.Parse(TextBoxInputX.Text) + n)
             {
                 result += "Success!";
@@ -348,7 +337,6 @@ namespace Cryptography_FeigeFiatShamirIdentification_IvanovA
                 Button_Click_3(null, null);
                 for(int i=0; i<t; i++)
                 {
-                    //Button_Click_3(null, null);
                     Button_Click_8(null, null);
                     Button_Click_7(null, null);
                     Button_Click_10(null, null);
